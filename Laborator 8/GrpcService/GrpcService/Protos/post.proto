@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "GrpcService";
+
+package greet;
+
+service RemotePost {
+	rpc GetPostInfo (PostLookUpModel) returns (PostModel);
+	rpc AddPost (PostModel) returns (PostActionReply);
+	rpc UpdatePost (PostModel) returns (PostActionReply);
+	rpc DeletePost (PostLookUpModel) returns (PostActionReply);
+}
+
+message PostLookUpModel {
+	int32 id = 1;
+}
+
+message PostModel {
+	int32 id = 1;
+	string Description = 2;
+	string Domain = 3;
+	google.protobuf.Timestamp Date = 4;
+}
+
+message PostActionReply {
+	string message = 1;
+}
